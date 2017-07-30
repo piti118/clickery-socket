@@ -8,16 +8,23 @@ const router = express.Router();
 const randomString = require('randomstring');
 const uuid = require('uuid/v1');
 const logger = require('morgan')("default");
-var bodyParser = require('body-parser');
-var favicon = require('serve-favicon');
-var path = require('path');
-var compression = require('compression')
+const bodyParser = require('body-parser');
+const favicon = require('serve-favicon');
+const path = require('path');
+const compression = require('compression')
+const fs = require('fs')
+
 
 app.use(compression());
 app.use(bodyParser.json());
 app.use(logger)
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+const favPath = path.join(__dirname, 'public', 'favicon.ico')
+if (fs.existsSync(favPath)) {
+  app.use(favicon(favPath));
+}
+
+
 
 class Room {
 
