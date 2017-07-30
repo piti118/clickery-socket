@@ -9,9 +9,15 @@ const randomString = require('randomstring');
 const uuid = require('uuid/v1');
 const logger = require('morgan')("default");
 var bodyParser = require('body-parser');
+var favicon = require('serve-favicon');
+var path = require('path');
+var compression = require('compression')
 
+app.use(compression());
 app.use(bodyParser.json());
 app.use(logger)
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
 class Room {
 
