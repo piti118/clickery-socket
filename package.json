@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "babel-node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prod": "node build/index.js",
+    "build": "babel index.js -d build"
   },
   "author": "",
   "license": "ISC",
