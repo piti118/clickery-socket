@@ -113,6 +113,10 @@ router.post('/v1/create-room', (req, res) => {
   });
 });
 
+router.get('*', function(req, res){
+  res.sendFile('index.html', {root:'./public'});
+});
+
 
 function onRoomNotExist(socket, roomid) {
   const msg = `Room ${roomid} doesn't exist.`
