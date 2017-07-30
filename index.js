@@ -1,6 +1,6 @@
-import express from 'express'
+const express = require('express')
 
-const app = require('express')();
+const app = express();
 // $FlowFixMe
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
@@ -18,12 +18,13 @@ const fs = require('fs')
 app.use(compression());
 app.use(bodyParser.json());
 app.use(logger)
-app.use(express.static(path.join(__dirname, 'public')));
-const favPath = path.join(__dirname, 'public', 'favicon.ico')
+
+app.use(express.static('public'));
+const favPath = 'public/favico.ico'
 if (fs.existsSync(favPath)) {
   app.use(favicon(favPath));
 }
-app.set('view engine', 'html');
+app.set('view engine', 'jade');
 
 
 
@@ -95,10 +96,6 @@ class AllRoom { //TODO move this to redis?
 }
 
 const Rooms = new AllRoom()
-
-router.get('/', (req, res, next) => {
-  res.render('index', { title: 'Express' });
-});
 
 router.get('/v1/create-token', (req, res) => {
   res.json({
