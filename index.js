@@ -23,6 +23,7 @@ const favPath = path.join(__dirname, 'public', 'favicon.ico')
 if (fs.existsSync(favPath)) {
   app.use(favicon(favPath));
 }
+app.set('view engine', 'html');
 
 
 
